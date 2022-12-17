@@ -1,0 +1,18 @@
+{
+    "name": "com.spellboundar.app-identification.Editor",
+    "rootNamespace": "SpellBoundAR.AppIdentification",
+    "references": [
+        "GUID:f102733d58fda42a08bad5cb124568c3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,14 @@
+{
+    "name": "com.spellboundar.app-identification",
+    "rootNamespace": "SpellBoundAR.AppIdentification",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

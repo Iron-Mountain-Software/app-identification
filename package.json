@@ -1,0 +1,21 @@
+{
+  "name": "com.spellboundar.app-identification",
+  "version": "1.0.0",
+  "displayName": "App Identification",
+  "description": "A library for managing app identifiers and different release variants.",
+  "unity": "2019.1",
+  "keywords": [
+    "tools"
+  ],
+  "author": "Chris Monteferrante <chris@spellboundar.com>",
+  "type": "tool",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpellBoundAR-Packages/app-identification.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpellBoundAR-Packages/app-identification/issues"
+  },
+  "homepage": "https://github.com/SpellBoundAR-Packages/app-identification#readme"
+}
