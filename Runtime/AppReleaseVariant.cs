@@ -1,23 +1,39 @@
+using System;
+using UnityEngine;
+
 namespace SpellBoundAR.AppIdentification
 {
-    public class AppReleaseVariant
+    [Serializable]
+    public class AppReleaseVariant : IAppReleaseVariant
     {
-        public string ProductName { get; }
-        public string ApplicationIdentifier { get; }
-        public string IconPath { get; }
+        [SerializeField] private string productName;
+        [SerializeField] private string applicationIdentifier;
+        [SerializeField] private string iconPath;
+        [SerializeField] private string remoteConfigEnvironmentID;
+
+        public string ProductName => productName;
+        public string ApplicationIdentifier => applicationIdentifier;
+        public Texture2D Icon => Resources.Load(iconPath) as Texture2D;
+        public string RemoteConfigEnvironmentID => remoteConfigEnvironmentID;
 
         public override string ToString()
         {
             return $"ProductName: {ProductName}\n" +
                    $"ApplicationIdentifier: {ApplicationIdentifier}\n" +
-                   $"IconPath: {IconPath}\n";
+                   $"IconPath: {iconPath}\n" +
+                   $"RemoteConfigEnvironmentID: {RemoteConfigEnvironmentID}\n";
         }
 
-        public AppReleaseVariant(string productName, string applicationIdentifier, string iconPath)
+        public AppReleaseVariant(
+            string productName,
+            string applicationIdentifier,
+            string iconPath,
+            string remoteConfigEnvironmentID)
         {
-            ProductName = productName;
-            ApplicationIdentifier = applicationIdentifier;
-            IconPath = iconPath;
+            this.productName = productName;
+            this.applicationIdentifier = applicationIdentifier;
+            this.iconPath = iconPath;
+            this.remoteConfigEnvironmentID = remoteConfigEnvironmentID;
         }
     }
 }

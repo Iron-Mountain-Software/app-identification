@@ -1,6 +1,6 @@
 {
   "name": "com.spellboundar.app-identification",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "App Identification",
   "description": "A library for managing app identifiers and different release variants.",
   "unity": "2019.1",
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/SpellBoundAR-Packages/app-identification/issues"
   },
-  "homepage": "https://github.com/SpellBoundAR-Packages/app-identification#readme"
+  "homepage": "https://github.com/SpellBoundAR-Packages/app-identification#readme",
+  "dependencies": {
+    "com.spellboundar.asset-management": "1.0.2"
+  }
 }

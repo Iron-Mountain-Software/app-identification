@@ -5,11 +5,10 @@ namespace SpellBoundAR.AppIdentification.Editor
 {
     public static class AppIdentificationEditor
     {
-        public static void ChangeAppReleaseVariant(AppReleaseVariant variant)
+        public static void ChangeAppReleaseVariant(IAppReleaseVariant variant)
         {
             if (variant == null) return;
-            Texture2D icon = Resources.Load(variant.IconPath) as Texture2D;
-            ChangeIcons(icon);
+            ChangeIcons(variant.Icon);
             PlayerSettings.productName = variant.ProductName;
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, variant.ApplicationIdentifier);
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, variant.ApplicationIdentifier);
