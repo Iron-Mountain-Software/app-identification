@@ -1,6 +1,6 @@
 {
   "name": "com.spellboundar.app-identification",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "App Identification",
   "description": "A library for managing app identifiers and different release variants.",
   "unity": "2019.1",
