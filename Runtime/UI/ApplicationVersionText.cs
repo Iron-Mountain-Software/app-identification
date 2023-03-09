@@ -4,8 +4,9 @@ using UnityEngine.UI;
 namespace SpellBoundAR.AppIdentification.UI
 {
     [ExecuteAlways]
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(Text))]
-    public class AppVersionText : MonoBehaviour
+    public class ApplicationVersionText : MonoBehaviour
     {
         [Header("Cache")]
         private Text _text;
@@ -16,8 +17,7 @@ namespace SpellBoundAR.AppIdentification.UI
 
         private void RefreshText()
         {
-            if (!_text) return;
-            _text.text = Application.version;
+            if (_text) _text.text = Application.version;
         }
     }
 }
