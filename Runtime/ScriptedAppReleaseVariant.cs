@@ -9,11 +9,13 @@ namespace SpellBoundAR.AppIdentification
         [SerializeField] private string productName;
         [SerializeField] private string applicationIdentifier;
         [SerializeField] private Texture2D icon;
+        [SerializeField] private AppLogos logos;
         [SerializeField] private string remoteConfigEnvironmentID;
 
         public string ProductName => productName;
         public string ApplicationIdentifier => applicationIdentifier;
         public Texture2D Icon => icon;
+        public AppLogos Logos => logos;
         public string RemoteConfigEnvironmentID => remoteConfigEnvironmentID;
 
         private string IconName => icon ? icon.name : "null";

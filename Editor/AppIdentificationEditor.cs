@@ -12,6 +12,7 @@ namespace SpellBoundAR.AppIdentification.Editor
             PlayerSettings.productName = variant.ProductName;
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, variant.ApplicationIdentifier);
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, variant.ApplicationIdentifier);
+            AppReleaseVariantsManager.CurrentAppReleaseVariant = variant;
         }
 
         private static void ChangeIcons(Texture2D icon)
