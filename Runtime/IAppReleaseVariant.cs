@@ -9,7 +9,6 @@ namespace SpellBoundAR.AppIdentification
         public string ApplicationIdentifier { get; }
         public Texture2D Icon { get; }
         public AppLogos Logos { get; }
-        public string RemoteConfigEnvironmentID { get; }
         public ScriptedRemoteConfigurationEnvironment RemoteConfigurationEnvironment { get; }
         public string ToString();
     }

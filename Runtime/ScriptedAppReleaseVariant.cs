@@ -11,14 +11,12 @@ namespace SpellBoundAR.AppIdentification
         [SerializeField] private string applicationIdentifier;
         [SerializeField] private Texture2D icon;
         [SerializeField] private AppLogos logos;
-        [SerializeField] private string remoteConfigEnvironmentID;
         [SerializeField] private ScriptedRemoteConfigurationEnvironment remoteConfigurationEnvironment;
 
         public string ProductName => productName;
         public string ApplicationIdentifier => applicationIdentifier;
         public Texture2D Icon => icon;
         public AppLogos Logos => logos;
-        public string RemoteConfigEnvironmentID => remoteConfigEnvironmentID;
         public ScriptedRemoteConfigurationEnvironment RemoteConfigurationEnvironment => remoteConfigurationEnvironment;
 
         private string IconName => icon ? icon.name : "null";
@@ -27,8 +25,7 @@ namespace SpellBoundAR.AppIdentification
         {
             return $"ProductName: {ProductName}\n" +
                    $"ApplicationIdentifier: {ApplicationIdentifier}\n" +
-                   $"Icon: {IconName}\n" +
-                   $"RemoteConfigEnvironmentID: {RemoteConfigEnvironmentID}\n";
+                   $"Icon: {IconName}";
         }
     }
 }
