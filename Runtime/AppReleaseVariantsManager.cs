@@ -47,7 +47,7 @@ namespace SpellBoundAR.AppIdentification
 
         private static void ActivateRemoteEnvironment()
         {
-            if (CurrentAppReleaseVariant == null || CurrentAppReleaseVariant.RemoteConfigurationEnvironment) return;
+            if (CurrentAppReleaseVariant == null || !CurrentAppReleaseVariant.RemoteConfigurationEnvironment) return;
             CurrentAppReleaseVariant.RemoteConfigurationEnvironment.ActivateEnvironment();
         }
     }
