@@ -2,7 +2,8 @@
     "name": "com.spellboundar.app-identification",
     "rootNamespace": "SpellBoundAR.AppIdentification",
     "references": [
-        "GUID:34f818b22e8004c0a83e30ac9b4e6722"
+        "GUID:34f818b22e8004c0a83e30ac9b4e6722",
+        "GUID:5936c6b2e2d714a3897b7b0c33f0e3a3"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

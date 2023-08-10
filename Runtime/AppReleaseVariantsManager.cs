@@ -1,4 +1,5 @@
 using System;
+using PlasticPipe.Server;
 using UnityEngine;
 
 namespace SpellBoundAR.AppIdentification
@@ -11,30 +12,44 @@ namespace SpellBoundAR.AppIdentification
         
         public static IAppReleaseVariant CurrentAppReleaseVariant
         {
-            get
-            {
-                if (_currentAppReleaseVariant == null
-                    && Database.Instance)
-                {
-                    CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list.Find(
-                        test =>
-                            test
-                            && test.ApplicationIdentifier == Application.identifier);
-                }
-                else if (_currentAppReleaseVariant == null
-                         && Database.Instance
-                         && Database.Instance.AppReleaseVariants.list.Count > 0)
-                {
-                    CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list[0];
-                }
-                return _currentAppReleaseVariant;
-            }
+            get => _currentAppReleaseVariant;
             set
             {
                 if (_currentAppReleaseVariant == value) return;
                 _currentAppReleaseVariant = value;
+                ActivateRemoteEnvironment();
                 OnCurrentAppReleaseVariantChanged?.Invoke();
             }
+        }
+        
+        public static bool Initialized { get; private set; }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void StartInitialization()
+        {
+            if (Initialized) return;
+            InitializeCurrentAppReleaseVariant();
+            RemoteConfiguration.RemoteConfigurationManager.OnInitialized += ActivateRemoteEnvironment;
+            Initialized = true;
+        }
+
+        private static void InitializeCurrentAppReleaseVariant()
+        {
+            if (_currentAppReleaseVariant != null) return;
+            if (!Database.Instance) return;
+            if (Database.Instance.AppReleaseVariants.list.Count == 0) return;
+            CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list.Find(
+                appReleaseVariant =>
+                    appReleaseVariant != null
+                    && appReleaseVariant.ApplicationIdentifier == Application.identifier);
+            if (_currentAppReleaseVariant != null) return;
+            CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list[0];
+        }
+
+        private static void ActivateRemoteEnvironment()
+        {
+            if (CurrentAppReleaseVariant == null || CurrentAppReleaseVariant.RemoteConfigurationEnvironment) return;
+            CurrentAppReleaseVariant.RemoteConfigurationEnvironment.ActivateEnvironment();
         }
     }
 }

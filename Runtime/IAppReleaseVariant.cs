@@ -1,3 +1,4 @@
+using SpellBoundAR.RemoteConfiguration;
 using UnityEngine;
 
 namespace SpellBoundAR.AppIdentification
@@ -9,7 +10,7 @@ namespace SpellBoundAR.AppIdentification
         public Texture2D Icon { get; }
         public AppLogos Logos { get; }
         public string RemoteConfigEnvironmentID { get; }
-
+        public ScriptedRemoteConfigurationEnvironment RemoteConfigurationEnvironment { get; }
         public string ToString();
     }
 }
