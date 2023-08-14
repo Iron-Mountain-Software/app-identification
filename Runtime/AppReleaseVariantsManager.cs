@@ -15,26 +15,18 @@ namespace SpellBoundAR.AppIdentification
             set
             {
                 if (_currentAppReleaseVariant == value) return;
+                _currentAppReleaseVariant?.Deactivate();
                 _currentAppReleaseVariant = value;
                 _currentAppReleaseVariant?.Activate();
                 OnCurrentAppReleaseVariantChanged?.Invoke();
             }
         }
         
-        public static bool Initialized { get; private set; }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void StartInitialization()
         {
-            if (Initialized) return;
-            InitializeCurrentAppReleaseVariant();
-            RemoteConfiguration.RemoteConfigurationManager.OnInitialized += ActivateRemoteEnvironment;
-            Initialized = true;
-        }
-
-        private static void InitializeCurrentAppReleaseVariant()
-        {
-            if (_currentAppReleaseVariant != null) return;
+            if (CurrentAppReleaseVariant != null) return;
             if (!Database.Instance) return;
             if (Database.Instance.AppReleaseVariants.list.Count == 0) return;
             CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list.Find(
@@ -43,12 +35,6 @@ namespace SpellBoundAR.AppIdentification
                     && appReleaseVariant.ApplicationIdentifier == Application.identifier);
             if (_currentAppReleaseVariant != null) return;
             CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list[0];
-        }
-
-        public static void ActivateRemoteEnvironment()
-        {
-            if (CurrentAppReleaseVariant == null || !CurrentAppReleaseVariant.RemoteConfigurationEnvironment) return;
-            CurrentAppReleaseVariant.RemoteConfigurationEnvironment.ActivateEnvironment();
         }
     }
 }

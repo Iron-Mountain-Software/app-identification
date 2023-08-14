@@ -1,5 +1,4 @@
 using SpellBoundAR.AssetManagement;
-using SpellBoundAR.RemoteConfiguration;
 using UnityEngine;
 
 namespace SpellBoundAR.AppIdentification
@@ -11,13 +10,11 @@ namespace SpellBoundAR.AppIdentification
         [SerializeField] private string applicationIdentifier;
         [SerializeField] private Texture2D icon;
         [SerializeField] private AppLogos logos;
-        [SerializeField] private ScriptedRemoteConfigurationEnvironment remoteConfigurationEnvironment;
 
         public string ProductName => productName;
         public string ApplicationIdentifier => applicationIdentifier;
         public Texture2D Icon => icon;
         public AppLogos Logos => logos;
-        public ScriptedRemoteConfigurationEnvironment RemoteConfigurationEnvironment => remoteConfigurationEnvironment;
 
         private string IconName => icon ? icon.name : "null";
 
@@ -28,9 +25,7 @@ namespace SpellBoundAR.AppIdentification
                    $"Icon: {IconName}";
         }
 
-        public virtual void Activate()
-        {
-            AppReleaseVariantsManager.ActivateRemoteEnvironment();
-        }
+        public virtual void Activate() { }
+        public virtual void Deactivate() { }
     }
 }
