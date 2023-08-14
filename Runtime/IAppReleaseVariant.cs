@@ -11,5 +11,6 @@ namespace SpellBoundAR.AppIdentification
         public AppLogos Logos { get; }
         public ScriptedRemoteConfigurationEnvironment RemoteConfigurationEnvironment { get; }
         public string ToString();
+        public void Activate();
     }
 }

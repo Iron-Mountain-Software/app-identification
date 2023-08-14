@@ -16,7 +16,7 @@ namespace SpellBoundAR.AppIdentification
             {
                 if (_currentAppReleaseVariant == value) return;
                 _currentAppReleaseVariant = value;
-                ActivateRemoteEnvironment();
+                _currentAppReleaseVariant?.Activate();
                 OnCurrentAppReleaseVariantChanged?.Invoke();
             }
         }
@@ -45,7 +45,7 @@ namespace SpellBoundAR.AppIdentification
             CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list[0];
         }
 
-        private static void ActivateRemoteEnvironment()
+        public static void ActivateRemoteEnvironment()
         {
             if (CurrentAppReleaseVariant == null || !CurrentAppReleaseVariant.RemoteConfigurationEnvironment) return;
             CurrentAppReleaseVariant.RemoteConfigurationEnvironment.ActivateEnvironment();

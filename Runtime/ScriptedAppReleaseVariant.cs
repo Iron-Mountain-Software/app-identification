@@ -27,5 +27,10 @@ namespace SpellBoundAR.AppIdentification
                    $"ApplicationIdentifier: {ApplicationIdentifier}\n" +
                    $"Icon: {IconName}";
         }
+
+        public virtual void Activate()
+        {
+            AppReleaseVariantsManager.ActivateRemoteEnvironment();
+        }
     }
 }
