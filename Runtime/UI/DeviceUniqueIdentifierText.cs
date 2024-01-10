@@ -8,17 +8,16 @@ namespace SpellBoundAR.AppIdentification.UI
     [RequireComponent(typeof(Text))]
     public class DeviceUniqueIdentifierText : MonoBehaviour
     {
-        [Header("Cache")]
-        private Text _text;
+        [SerializeField] private Text text;
     
-        private void Awake() => _text = GetComponent<Text>();
-        private void OnEnable() => RefreshText();
-        private void OnValidate() => RefreshText();
+        private void Awake() => Refresh();
+        private void OnValidate() => Refresh();
+        private void OnEnable() => Refresh();
 
-        private void RefreshText()
+        private void Refresh()
         {
-            if (_text) _text.text = SystemInfo.deviceUniqueIdentifier;
+            if (!text) text = GetComponent<Text>();
+            if (text) text.text = SystemInfo.deviceUniqueIdentifier;
         }
     }
 }
-

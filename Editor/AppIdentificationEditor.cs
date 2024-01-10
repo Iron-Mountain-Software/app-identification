@@ -10,8 +10,8 @@ namespace SpellBoundAR.AppIdentification.Editor
             if (variant == null) return;
             ChangeIcons(variant.Icon);
             PlayerSettings.productName = variant.ProductName;
-            PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, variant.ApplicationIdentifier);
-            PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, variant.ApplicationIdentifier);
+            PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, variant.ApplicationIdentifiers.IOS);
+            PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, variant.ApplicationIdentifiers.Android);
             AppReleaseVariantsManager.CurrentAppReleaseVariant = variant;
         }
 

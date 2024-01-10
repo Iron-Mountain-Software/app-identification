@@ -21,7 +21,6 @@ namespace SpellBoundAR.AppIdentification
                 OnCurrentAppReleaseVariantChanged?.Invoke();
             }
         }
-        
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void StartInitialization()
@@ -32,7 +31,8 @@ namespace SpellBoundAR.AppIdentification
             CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list.Find(
                 appReleaseVariant =>
                     appReleaseVariant != null
-                    && appReleaseVariant.ApplicationIdentifier == Application.identifier);
+                    && appReleaseVariant.ApplicationIdentifiers != null
+                    && appReleaseVariant.ApplicationIdentifiers.Contains(Application.identifier));
             if (_currentAppReleaseVariant != null) return;
             CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list[0];
         }

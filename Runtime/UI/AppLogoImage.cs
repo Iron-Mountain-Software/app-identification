@@ -4,18 +4,15 @@ using UnityEngine.UI;
 namespace SpellBoundAR.AppIdentification.UI
 {
     [ExecuteAlways]
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(Image))]
     public class AppLogoImage : MonoBehaviour
     {
+        [SerializeField] private Image image;
         [SerializeField] private AppLogos.Type type = AppLogos.Type.HorizontalLight;
         
-        [Header("Cache")]
-        private Image _image;
-        
-        private void Awake()
-        {
-            _image = GetComponent<Image>();
-        }
+        private void Awake() => Refresh();
+        private void OnValidate() => Refresh();
 
         private void OnEnable()
         {
@@ -30,13 +27,8 @@ namespace SpellBoundAR.AppIdentification.UI
 
         private void Refresh()
         {
-            if (!_image) return;
-            _image.sprite = AppReleaseVariantsManager.CurrentAppReleaseVariant?.Logos.GetLogo(type);
-        }
-
-        private void OnValidate()
-        {
-            Refresh();
+            if (!image) image = GetComponent<Image>();
+            if (image) image.sprite = AppReleaseVariantsManager.CurrentAppReleaseVariant?.Logos.GetLogo(type);
         }
     }
 }
