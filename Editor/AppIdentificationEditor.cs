@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SpellBoundAR.AppIdentification.Editor
+namespace IronMountain.AppIdentification.Editor
 {
     public static class AppIdentificationEditor
     {
@@ -13,6 +13,7 @@ namespace SpellBoundAR.AppIdentification.Editor
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, variant.ApplicationIdentifiers.IOS);
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, variant.ApplicationIdentifiers.Android);
             AppReleaseVariantsManager.CurrentAppReleaseVariant = variant;
+            variant.Activate();
         }
 
         private static void ChangeIcons(Texture2D icon)

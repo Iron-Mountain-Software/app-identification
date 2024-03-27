@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SpellBoundAR.AppIdentification
+namespace IronMountain.AppIdentification
 {
     [Serializable]
     public class ApplicationIdentifiers

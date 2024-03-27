@@ -1,44 +1,77 @@
-using System.Net;
-using SpellBoundAR.AssetManagement.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace SpellBoundAR.AppIdentification.Editor
+namespace IronMountain.AppIdentification.Editor
 {
     [CustomEditor(typeof(Database), true)]
-    public class DatabaseInspector : SingletonDatabaseInspector
+    public class DatabaseInspector : UnityEditor.Editor
     {
-        protected override void RebuildLists()
-        {
-            Utilities.FillWithAssetsOfType(((Database) target).AppReleaseVariants.list, target);
-        }
+        private Database _database;
 
-        protected override void SortLists()
+        private void OnEnable()
         {
-            ((Database)target).AppReleaseVariants.SortList();
-        }
-
-        protected override void RebuildDictionaries()
-        {
-            ((Database)target).AppReleaseVariants.RebuildDictionary();
-        }
-
-        public override string ToString()
-        {
-            return ((Database)target).AppReleaseVariants.ToString("App Release Variants");
+            _database = (Database) target;
         }
 
         public override void OnInspectorGUI()
         {
-            foreach (ScriptedAppReleaseVariant appReleaseVariant in ((Database)target).AppReleaseVariants.list)
+            EditorGUILayout.Space();
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Rebuild"))
             {
-                if (!appReleaseVariant) continue;
-                if (GUILayout.Button("Switch to " + appReleaseVariant.ProductName, GUILayout.MinHeight(40)))
+                RebuildSceneList();
+                _database.SortList();
+                _database.RebuildDictionary();
+            }
+            if (GUILayout.Button("Log & Copy Data"))
+            {
+                string data = _database.ToString();
+                EditorGUIUtility.systemCopyBuffer = data;
+                Debug.Log(data);
+            }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space();
+
+            EditorGUILayout.BeginHorizontal();
+            SerializedProperty appReleaseVariants = serializedObject.FindProperty("appReleaseVariants");
+            EditorGUILayout.PropertyField(appReleaseVariants);
+            EditorGUILayout.BeginVertical(GUILayout.Width(75));
+            if (appReleaseVariants.isExpanded)
+            {
+                GUILayout.Space(EditorGUIUtility.singleLineHeight * 1.5f);
+                foreach (ScriptedAppReleaseVariant appReleaseVariant in _database.AppReleaseVariants)
                 {
-                    AppIdentificationEditor.ChangeAppReleaseVariant(appReleaseVariant);
+                    EditorGUI.BeginDisabledGroup(!appReleaseVariant);
+                    if (GUILayout.Button("Activate", GUILayout.ExpandWidth(true), GUILayout.MaxHeight(EditorGUIUtility.singleLineHeight)))
+                    {
+                        if (appReleaseVariant)
+                        {
+                            AppIdentificationEditor.ChangeAppReleaseVariant(appReleaseVariant);
+                        }
+                    }
+                    EditorGUI.EndDisabledGroup();
                 }
             }
-            base.OnInspectorGUI();
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndHorizontal();
+            
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void RebuildSceneList()
+        {
+            _database.AppReleaseVariants.Clear();
+            string[] guids = AssetDatabase.FindAssets($"t:{typeof(ScriptedAppReleaseVariant)}");
+            for( int i = 0; i < guids.Length; i++ )
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath( guids[i] );
+                ScriptedAppReleaseVariant asset = AssetDatabase.LoadAssetAtPath<ScriptedAppReleaseVariant>( assetPath );
+                if (asset) _database.AppReleaseVariants.Add(asset);
+            }
+            EditorUtility.SetDirty(_database);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SpellBoundAR.AppIdentification.Editor
+namespace IronMountain.AppIdentification.Editor
 {
     [CustomEditor(typeof(ScriptedAppReleaseVariant), true)]
     public class ScriptedAppReleaseVariantInspector : UnityEditor.Editor

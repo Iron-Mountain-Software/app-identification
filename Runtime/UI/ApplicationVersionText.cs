@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SpellBoundAR.AppIdentification.UI
+namespace IronMountain.AppIdentification.UI
 {
     [ExecuteAlways]
     [DisallowMultipleComponent]

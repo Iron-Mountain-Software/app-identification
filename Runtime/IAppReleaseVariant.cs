@@ -1,9 +1,10 @@
 using UnityEngine;
 
-namespace SpellBoundAR.AppIdentification
+namespace IronMountain.AppIdentification
 {
     public interface IAppReleaseVariant
     {
+        public string ID { get; }
         public string ProductName { get; }
         public ApplicationIdentifiers ApplicationIdentifiers { get; }
         public Texture2D Icon { get; }

@@ -1,16 +1,17 @@
-using SpellBoundAR.AssetManagement;
 using UnityEngine;
 
-namespace SpellBoundAR.AppIdentification
+namespace IronMountain.AppIdentification
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/App Release Variants/App Release Variant")]
-    public class ScriptedAppReleaseVariant : IdentifiableScriptableObject, IAppReleaseVariant
+    public class ScriptedAppReleaseVariant : ScriptableObject, IAppReleaseVariant
     {
+        [SerializeField] private string id;
         [SerializeField] private string productName;
         [SerializeField] private ApplicationIdentifiers applicationIdentifiers;
         [SerializeField] private Texture2D icon;
         [SerializeField] private AppLogos logos;
 
+        public string ID => id;
         public string ProductName => productName;
         public ApplicationIdentifiers ApplicationIdentifiers => applicationIdentifiers;
         public Texture2D Icon => icon;
@@ -26,5 +27,20 @@ namespace SpellBoundAR.AppIdentification
 
         public virtual void Activate() { }
         public virtual void Deactivate() { }
+        
+#if UNITY_EDITOR
+        
+        public virtual void Reset()
+        {
+            GenerateNewID();
+        }
+
+        [ContextMenu("Generate New ID")]
+        private void GenerateNewID()
+        {
+            id = UnityEditor.GUID.Generate().ToString();
+        }
+
+#endif
     }
 }

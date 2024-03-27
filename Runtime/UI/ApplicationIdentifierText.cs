@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,15 +6,14 @@ namespace IronMountain.AppIdentification.UI
 {
     [ExecuteAlways]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(Image))]
-    public class AppLogoImage : MonoBehaviour
+    [RequireComponent(typeof(Text))]
+    public class ApplicationIdentifierText : MonoBehaviour
     {
-        [SerializeField] private Image image;
-        [SerializeField] private AppLogos.Type type = AppLogos.Type.HorizontalLight;
-        
+        [SerializeField] private Text text;
+    
         private void Awake() => Refresh();
         private void OnValidate() => Refresh();
-
+        
         private void OnEnable()
         {
             AppReleaseVariantsManager.OnCurrentAppReleaseVariantChanged += Refresh;
@@ -27,8 +27,8 @@ namespace IronMountain.AppIdentification.UI
 
         private void Refresh()
         {
-            if (!image) image = GetComponent<Image>();
-            if (image) image.sprite = AppReleaseVariantsManager.CurrentAppReleaseVariant?.Logos.GetLogo(type);
+            if (!text) text = GetComponent<Text>();
+            if (text) text.text = Application.identifier;
         }
     }
 }

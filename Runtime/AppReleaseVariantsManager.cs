@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SpellBoundAR.AppIdentification
+namespace IronMountain.AppIdentification
 {
     public static class AppReleaseVariantsManager
     {
@@ -27,14 +27,10 @@ namespace SpellBoundAR.AppIdentification
         {
             if (CurrentAppReleaseVariant != null) return;
             if (!Database.Instance) return;
-            if (Database.Instance.AppReleaseVariants.list.Count == 0) return;
-            CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list.Find(
-                appReleaseVariant =>
-                    appReleaseVariant != null
-                    && appReleaseVariant.ApplicationIdentifiers != null
-                    && appReleaseVariant.ApplicationIdentifiers.Contains(Application.identifier));
-            if (_currentAppReleaseVariant != null) return;
-            CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants.list[0];
+            if (Database.Instance.AppReleaseVariants.Count == 0) return;
+            CurrentAppReleaseVariant = Database.Instance.GetReleaseVariantByID(Application.identifier);
+            if (CurrentAppReleaseVariant != null || Database.Instance.AppReleaseVariants.Count == 0) return;
+            CurrentAppReleaseVariant = Database.Instance.AppReleaseVariants[0];
         }
     }
 }
