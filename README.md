@@ -2,6 +2,8 @@
 *Version: 1.3.0*
 ## Description: 
 A library for managing app identifiers and different release variants.
+## Package Mirrors: 
+[<img src='https://img.itch.zone/aW1nLzEzNzQ2ODg3LnBuZw==/original/npRUfq.png'>](https://github.com/Iron-Mountain-Software/app-identification)[<img src='https://img.itch.zone/aW1nLzEzNzQ2ODkyLnBuZw==/original/Fq0ORM.png'>](https://www.npmjs.com/package/com.iron-mountain.app-identification)[<img src='https://img.itch.zone/aW1nLzEzNzQ2ODk4LnBuZw==/original/Rv4m96.png'>](https://iron-mountain.itch.io/app-identification)
 ---
 ## Key Scripts & Components: 
 1. public struct **AppLogos**

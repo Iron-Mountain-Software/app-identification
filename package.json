@@ -1,6 +1,6 @@
 {
   "name": "com.iron-mountain.app-identification",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "displayName": "App Identification",
   "author": "Chris Monteferrante <ludachrismonte@gmail.com>",
   "unity": "2019.1",
@@ -21,6 +21,19 @@
   "keywords": [
     "tools"
   ],
-  "sources": [],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/Iron-Mountain-Software/app-identification"
+    },
+    {
+      "type": "npm",
+      "url": "https://www.npmjs.com/package/com.iron-mountain.app-identification"
+    },
+    {
+      "type": "itch.io",
+      "url": "https://iron-mountain.itch.io/app-identification"
+    }
+  ],
   "dependencies": {}
 }
