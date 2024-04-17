@@ -28,7 +28,9 @@ namespace IronMountain.AppIdentification.UI
         private void Refresh()
         {
             if (!image) image = GetComponent<Image>();
-            if (image) image.sprite = AppReleaseVariantsManager.CurrentAppReleaseVariant?.Logos.GetLogo(type);
+            if (!image) return;
+            image.sprite = AppReleaseVariantsManager.CurrentAppReleaseVariant?.Logos.GetLogo(type);
+            image.enabled = image.sprite;
         }
     }
 }
