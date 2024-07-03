@@ -13,7 +13,9 @@ namespace IronMountain.AppIdentification
             SquareLight,
             SquareDark,
             IconLight,
-            IconDark
+            IconDark,
+            BackgroundLight,
+            BackgroundDark
         }
         
         [SerializeField] private Sprite horizontalLight;
@@ -22,6 +24,8 @@ namespace IronMountain.AppIdentification
         [SerializeField] private Sprite squareDark;
         [SerializeField] private Sprite iconLight;
         [SerializeField] private Sprite iconDark;
+        [SerializeField] private Sprite backgroundLight;
+        [SerializeField] private Sprite backgroundDark;
 
         public Sprite HorizontalLight => horizontalLight;
         public Sprite HorizontalDark => horizontalDark;
@@ -29,6 +33,8 @@ namespace IronMountain.AppIdentification
         public Sprite SquareDark => squareDark;
         public Sprite IconLight => iconLight;
         public Sprite IconDark => iconDark;
+        public Sprite BackgroundLight => backgroundLight;
+        public Sprite BackgroundDark => backgroundDark;
 
         public Sprite GetLogo(Type type)
         {
@@ -46,6 +52,10 @@ namespace IronMountain.AppIdentification
                     return IconLight;
                 case Type.IconDark:
                     return IconDark;
+                case Type.BackgroundLight:
+                    return BackgroundLight;
+                case Type.BackgroundDark:
+                    return BackgroundDark;
                 default:
                     return null;
             }

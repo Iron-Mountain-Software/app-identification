@@ -1,5 +1,5 @@
 # App Identification
-*Version: 1.3.3*
+*Version: 1.3.4*
 ## Description: 
 A library for managing app identifiers and different release variants.
 ## Package Mirrors: 
@@ -14,6 +14,8 @@ A library for managing app identifiers and different release variants.
       * public Sprite ***SquareDark***  { get; }
       * public Sprite ***IconLight***  { get; }
       * public Sprite ***IconDark***  { get; }
+      * public Sprite ***BackgroundLight***  { get; }
+      * public Sprite ***BackgroundDark***  { get; }
    * Methods: 
       * public Sprite ***GetLogo***(Type type)
 1. public class **AppReleaseVariantDependantGameObject** : MonoBehaviour

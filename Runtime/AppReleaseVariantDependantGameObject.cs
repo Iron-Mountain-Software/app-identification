@@ -14,6 +14,8 @@ namespace IronMountain.AppIdentification
         private void OnValidate()
         {
             if (!controlledObject) controlledObject = gameObject;
+            if (defaultState) variantsWhereActive.Clear();
+            else variantsWhereNotActive.Clear();
             Refresh();
         }
 
