@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace IronMountain.AppIdentification.Editor
 {
     public static class AppIdentificationEditor
     {
+        private static string androidManifestPath = "Assets/Plugins/Android/AndroidManifest.xml";
+
         public static void ChangeAppReleaseVariant(IAppReleaseVariant variant)
         {
             if (variant == null) return;
@@ -12,6 +15,12 @@ namespace IronMountain.AppIdentification.Editor
             PlayerSettings.productName = variant.ProductName;
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, variant.ApplicationIdentifiers.IOS);
             PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, variant.ApplicationIdentifiers.Android);
+            PlayerSettings.iOS.iOSUrlSchemes = variant.IOSUrlSchemes;
+            if (!string.IsNullOrWhiteSpace(variant.AndroidDeeplink))
+            {
+                ChangeAndroidDeepLink(variant.AndroidDeeplink);
+            }
+            else RemoveDeepLink();
             AppReleaseVariantsManager.CurrentAppReleaseVariant = variant;
             variant.Activate();
         }
@@ -42,6 +51,69 @@ namespace IronMountain.AppIdentification.Editor
             }
             
             PlayerSettings.SetPlatformIcons(BuildTargetGroup.Android, kind, icons);
+        }
+        
+        private static void ChangeAndroidDeepLink(string deepLink)
+        {
+            if (!File.Exists(androidManifestPath))
+            {
+                Debug.LogError("AndroidManifest.xml not found at: " + androidManifestPath);
+                return;
+            }
+
+            // Load the AndroidManifest.xml file
+            string manifestContent = File.ReadAllText(androidManifestPath);
+
+            // Modify the intent-filter for deep linking
+            string deepLinkIntentFilter = $@"
+            <intent-filter>
+                <action android:name=""android.intent.action.VIEW"" />
+                <category android:name=""android.intent.category.DEFAULT"" />
+                <category android:name=""android.intent.category.BROWSABLE"" />
+                <data android:scheme=""{deepLink}"" />
+            </intent-filter>";
+
+            // Replace existing deep link or add it if not present
+            if (manifestContent.Contains("<data android:scheme="))
+            {
+                manifestContent = System.Text.RegularExpressions.Regex.Replace(manifestContent, @"<data android:scheme=""[^""]+"" />", $@"<data android:scheme=""{deepLink}"" />");
+            }
+            else
+            {
+                // Add the intent-filter for deep linking under the <activity> tag
+                manifestContent = manifestContent.Replace("</activity>", deepLinkIntentFilter + "\n</activity>");
+            }
+
+            // Save changes back to the AndroidManifest.xml file
+            File.WriteAllText(androidManifestPath, manifestContent);
+
+            Debug.Log("Deep link URL updated in AndroidManifest.xml to: " + deepLink);
+        }
+        
+        private static void RemoveDeepLink()
+        {
+            if (!File.Exists(androidManifestPath))
+            {
+                Debug.LogError("AndroidManifest.xml not found at: " + androidManifestPath);
+                return;
+            }
+
+            // Load the AndroidManifest.xml file
+            string manifestContent = File.ReadAllText(androidManifestPath);
+
+            // Find and remove the intent-filter block related to deep linking
+            string deepLinkIntentFilterPattern = @"<intent-filter>\s*<action android:name=""android.intent.action.VIEW"" />\s*<category android:name=""android.intent.category.DEFAULT"" />\s*<category android:name=""android.intent.category.BROWSABLE"" />\s*<data android:scheme=""[^""]+"" />\s*</intent-filter>";
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(manifestContent, deepLinkIntentFilterPattern))
+            {
+                manifestContent = System.Text.RegularExpressions.Regex.Replace(manifestContent, deepLinkIntentFilterPattern, string.Empty);
+                File.WriteAllText(androidManifestPath, manifestContent);
+                Debug.Log("Deep link intent-filter removed from AndroidManifest.xml");
+            }
+            else
+            {
+                Debug.LogWarning("No deep link intent-filter found in AndroidManifest.xml");
+            }
         }
     }
 }

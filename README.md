@@ -1,5 +1,5 @@
 # App Identification
-*Version: 1.3.4*
+*Version: 1.3.5*
 ## Description: 
 A library for managing app identifiers and different release variants.
 ## Package Mirrors: 
@@ -44,6 +44,8 @@ A library for managing app identifiers and different release variants.
       * public ApplicationIdentifiers ***ApplicationIdentifiers***  { get; }
       * public Texture2D ***Icon***  { get; }
       * public AppLogos ***Logos***  { get; }
+      * public String[] ***IOSUrlSchemes***  { get; }
+      * public String ***AndroidDeeplink***  { get; }
    * Methods: 
       * public abstract String ***ToString***()
       * public abstract void ***Activate***()
@@ -55,6 +57,8 @@ A library for managing app identifiers and different release variants.
       * public ApplicationIdentifiers ***ApplicationIdentifiers***  { get; }
       * public Texture2D ***Icon***  { get; }
       * public AppLogos ***Logos***  { get; }
+      * public String[] ***IOSUrlSchemes***  { get; }
+      * public String ***AndroidDeeplink***  { get; }
    * Methods: 
       * public override String ***ToString***()
       * public virtual void ***Activate***()

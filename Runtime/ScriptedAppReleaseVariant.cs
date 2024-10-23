@@ -10,12 +10,16 @@ namespace IronMountain.AppIdentification
         [SerializeField] private ApplicationIdentifiers applicationIdentifiers;
         [SerializeField] private Texture2D icon;
         [SerializeField] private AppLogos logos;
+        [SerializeField] private string[] iOSUrlSchemes;
+        [SerializeField] private string androidDeeplink;
 
         public string ID => id;
         public string ProductName => productName;
         public ApplicationIdentifiers ApplicationIdentifiers => applicationIdentifiers;
         public Texture2D Icon => icon;
         public AppLogos Logos => logos;
+        public string[] IOSUrlSchemes => iOSUrlSchemes;
+        public string AndroidDeeplink => androidDeeplink;
 
         private string IconName => icon ? icon.name : "null";
 
