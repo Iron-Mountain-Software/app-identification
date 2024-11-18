@@ -1,5 +1,5 @@
 # App Identification
-*Version: 1.3.5*
+*Version: 1.3.6*
 ## Description: 
 A library for managing app identifiers and different release variants.
 ## Package Mirrors: 
@@ -66,6 +66,10 @@ A library for managing app identifiers and different release variants.
       * public virtual void ***Reset***()
 ### U I
 1. public class **AppLogoImage** : MonoBehaviour
-1. public class **ApplicationIdentifierText** : MonoBehaviour
-1. public class **ApplicationVersionText** : MonoBehaviour
+1. public class **ApplicationCompanyNameText** : ApplicationText
+1. public class **ApplicationIdentifierText** : ApplicationText
+1. public class **ApplicationProductNameText** : ApplicationText
+1. public abstract class **ApplicationText** : MonoBehaviour
+1. public class **ApplicationUnityVersionText** : ApplicationText
+1. public class **ApplicationVersionText** : ApplicationText
 1. public class **DeviceUniqueIdentifierText** : MonoBehaviour

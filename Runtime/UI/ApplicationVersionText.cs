@@ -1,23 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace IronMountain.AppIdentification.UI
 {
-    [ExecuteAlways]
-    [DisallowMultipleComponent]
-    [RequireComponent(typeof(Text))]
-    public class ApplicationVersionText : MonoBehaviour
+    public class ApplicationVersionText : ApplicationText
     {
-        [SerializeField] private Text text;
-    
-        private void Awake() => Refresh();
-        private void OnEnable() => Refresh();
-        private void OnValidate() => Refresh();
-
-        private void Refresh()
-        {
-            if (!text) text = GetComponent<Text>();
-            if (text) text.text = Application.version;
-        }
+        protected override string Value => Application.version;
     }
 }
